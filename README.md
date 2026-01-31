@@ -51,7 +51,12 @@ python VQDM/cal_loss_ratio_VQDM.py --model_name VQDM --filePath Imgs/VQDM --dist
 python cal_GLCM.py --image_dir Imgs/SD1.5 --output_file GLCM/SD1.5.txt
 ```
 
-### 6. 计算归因准确率 / Calculate Attribution Accuracy
+### 6. 确定归因阈值 / Determine the Threshold
+```bash
+python cal_threshold.py --Loss_ratio Result/SD1.5_SD1.5_l2.txt --GLCM GLCM/SD1.5.txt
+```
+
+### 7. 计算归因准确率 / Calculate Attribution Accuracy
 ```bash
 python cal_acc.py --Loss_ratio Result/SD1.5_SD2.1_l2.txt --GLCM GLCM/SD2.1.txt --threshold 1.0364583773111364
 ```
