@@ -8,12 +8,12 @@ This repository hosts the official PyTorch implementation of the paper: ["**AEDR
 
 ![method](Fig/Framework.png)
 
-The rapid advancement of image-generation technologies has made it possible for anyone to create photorealistic images using generative models, raising significant security concerns. To mitigate malicious use, tracing the origin of such images is essential. Reconstruction-based attribution methods offer a promising solution, but they often suffer from reduced accuracy and high computational costs when applied to state‑of‑the‑art (SOTA) models. To address these challenges, we propose AEDR (AutoEncoder Double-Reconstruction), a novel training‑free attribution method designed for generative models with continuous autoencoders. Unlike existing reconstruction‑based approaches that rely on the value of a single reconstruction loss, AEDR performs two consecutive reconstructions using the model’s autoencoder, and adopts the ratio of these two reconstruction losses as the attribution signal. This signal is further calibrated using the image homogeneity metric to improve accuracy, which inherently cancels out absolute biases caused by image complexity, with autoencoder‑based reconstruction ensuring superior computational efficiency. Experiments on eight top latent diffusion models show that AEDR achieves 25.5% higher attribution accuracy than existing reconstruction‑based methods, while requiring only 1% of the computational time.
+Abstract: The rapid advancement of image-generation technologies has made it possible for anyone to create photorealistic images using generative models, raising significant security concerns. To mitigate malicious use, tracing the origin of such images is essential. Reconstruction-based attribution methods offer a promising solution, but they often suffer from reduced accuracy and high computational costs when applied to SOTA models. To address these challenges, we propose AEDR, a novel training‑free attribution method designed for generative models with continuous autoencoders. Unlike existing reconstruction‑based approaches that rely on the value of a single reconstruction loss, AEDR performs two consecutive reconstructions using the model’s autoencoder, and adopts the ratio of these two reconstruction losses as the attribution signal. This signal is further calibrated using the image homogeneity metric to improve accuracy, which inherently cancels out absolute biases caused by image complexity, with autoencoder‑based reconstruction ensuring superior computational efficiency. Experiments on eight top latent diffusion models show that AEDR achieves 25.5% higher attribution accuracy than existing reconstruction‑based methods, while requiring only 1% of the computational time.
 
 ## Getting Started
 
-### Prerequisites
-```
+### 1. Create environment
+```bash
 git clone https://github.com/wangchao0708/AEDR.git
 cd AEDR
 unzip VQDM.zip
@@ -21,24 +21,37 @@ conda create -n AEDR python==3.10
 conda activate AEDR
 pip install -r requirements.txt
 ```
-### Obtain a Textual Description of the Real Image
-```
+
+### 2. Obtain a Textual Description of the Real Image
+```bash
 python img_to_text.py -f Imgs/Real -o Prompt.txt -c ViT-H-14/laion2b_s32b_b79k -m classic
 ```
-### Generate Images based on the Prompt
-```
+
+### 3. Generate Images based on the Prompt
+```bash
 python gen_img.py --model SD1.5 --prompt_file Prompt.txt
 ```
-### Calculate the Loss Ratio between the Two Reconstructions
+To meet the specific environmental dependencies of VQDM: 
+```bash
+python VQDM/gen_img_VQDM.py --model VQDM --prompt_file Prompt.txt
 ```
+
+### 4. Calculate the Loss Ratio between the Two Reconstructions
+```bash
 python cal_loss_ratio.py --model_name SD1.5 --filePath Imgs/SD1.5 --distance_metric l2
 ```
-### Calculate Image Homogeneity
+To meet the specific environmental dependencies of VQDM: 
+```bash
+python VQDM/cal_loss_ratio_VQDM.py --model_name VQDM --filePath Imgs/VQDM --distance_metric l2
 ```
+
+### 5. Calculate Image Homogeneity
+```bash
 python cal_GLCM.py --image_dir Imgs/SD1.5 --output_file GLCM/SD1.5.txt
 ```
-### Calculate Attribution Accuracy
-```
+
+### 6. Calculate Attribution Accuracy
+```bash
 python cal_acc.py --Loss_ratio Result/SD1.5_SD2.1_l2.txt --GLCM GLCM/SD2.1.txt --threshold 1.0364583773111364
 ```
 
