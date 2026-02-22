@@ -71,7 +71,7 @@ If you find our work useful for your research, please consider citing the follow
 @article{wang2025aedr,
   title={AEDR: Training-Free AI-Generated Image Attribution via Autoencoder Double-Reconstruction},
   author={Wang, Chao and Yang, Zijin and Wang, Yaofei and Zhang, Weiming and Chen, Kejiang},
-  journal={The Fortieth AAAI Conference on Artificial Intelligence},
-  year={2025}
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  year={2026}
 }
 ```
