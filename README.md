@@ -68,10 +68,13 @@ We borrow the code from [LatentTracer](https://github.com/ZhentingWang/LatentTra
 If you find our work useful for your research, please consider citing the following papers :)
 
 ```
-@inproceedings{wang2025aedr,
+@inproceedings{wang2026aedr,
   title={AEDR: Training-Free AI-Generated Image Attribution via Autoencoder Double-Reconstruction},
   author={Wang, Chao and Yang, Zijin and Wang, Yaofei and Zhang, Weiming and Chen, Kejiang},
   booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={40},
+  number={12},
+  pages={9675--9683},
   year={2026}
 }
 ```
